@@ -16,3 +16,4 @@ Make sure you upload the right token in `config/default.json`
 
 ## Babel config
 Project is using babel to write ES6 code, take a look `start` script in `package.json`
+Babel examples can be found [here](https://github.com/babel/example-node-server)
