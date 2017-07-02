@@ -1,5 +1,5 @@
 import cache from './database/cache.js';
-import staticResponses from './data/staticResponses.json';
+import staticResponses from './data/staticResponses.js';
 
 export default (app) => {
   app.command('start', (ctx) => {

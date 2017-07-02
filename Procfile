@@ -1,1 +1,1 @@
-web: node index.js --exec babel-node
+web: npm build && npm run serve
