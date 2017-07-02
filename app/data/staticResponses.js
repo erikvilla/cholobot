@@ -1,4 +1,4 @@
-{
+export default {
   "buenas": [
     "Que tienen de buenas",
     "Que tranza loroña",

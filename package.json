@@ -5,9 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start": "nodemon index.js --exec babel-node",
-    "start:dev": "NODE_ENV=development nodemon index.js --exec babel-node",
+    "start": "node dist/index.js",
+    "start:dev": "NODE_ENV=development nodemon ./app/index.js --exec babel-node",
+    "build": "babel app -d dist --presets es2015,stage-2",
     "lint": "eslint ./ || true"
+  },
+  "engines": {
+    "node": "6.10.1"
   },
   "repository": {
     "type": "git",
