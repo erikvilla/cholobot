@@ -8,7 +8,6 @@
     "start": "nodemon index.js --exec babel-node",
     "start:dev": "NODE_ENV=development nodemon index.js --exec babel-node",
     "lint": "eslint ./ || true"
-
   },
   "repository": {
     "type": "git",
@@ -26,6 +25,7 @@
   "homepage": "https://github.com/bokvilla/cholobot#readme",
   "dependencies": {
     "config": "^1.26.1",
+    "mongoose": "^4.11.0",
     "telegraf": "^3.8.0"
   },
   "devDependencies": {
@@ -34,6 +34,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.6.1"
   }
