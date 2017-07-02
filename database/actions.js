@@ -7,7 +7,8 @@ let db = null;
 
 const connect = () => {
   if(!db){
-    mongoose.connect(config.get('db_url'));
+    const dbURL = process.env.db_url || config.get('db_url');
+    mongoose.connect(dbURL);
     db = mongoose.connection;
   }
 };

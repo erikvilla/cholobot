@@ -20,7 +20,7 @@ getRules().then((result) => {
 );
 
 /** telegram app **/
-const token = config.get('token');
+const token = process.env.token || config.get('token');
 const app = new Telegraf(token);
 
 /** commands **/
