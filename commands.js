@@ -1,4 +1,5 @@
 import cache from './database/cache.js';
+import staticResponses from './data/staticResponses.json';
 
 export default (app) => {
   app.command('start', (ctx) => {
@@ -19,11 +20,12 @@ export default (app) => {
   });
 
   app.command('qtvv', (ctx) => {
-    ctx.reply('Que te valga verga');
+    ctx.reply(staticResponses['qtvv']);
   });
 
   app.command('buenas', (ctx) => {
-    ctx.reply('Que tranza loroña');
+    const index = Math.floor((Math.random() * staticResponses.buenas.length-1) + 1);
+    ctx.reply(staticResponses.buenas[index]);
   });
 
   app.command('next', (ctx) => {
