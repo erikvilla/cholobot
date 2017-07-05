@@ -6,6 +6,7 @@ Telegram bot to handle Thursday's lunch rules
 - Clone the repository.
 - Ask for the test bot token and add it to your `default.json` config file.
 - Ask for db_url value to connect to mongo cloud and add it to your `default.json` config file.
+- `npm install`
 - `npm run start:dev`
 - Now you can talk to the test instance and add new features
 
