@@ -2,17 +2,18 @@
 Telegram bot to handle Thursday's lunch rules
 
 ## Getting started
-- Clone the repository
-- Generate a Telegram bot token using botfather to test locally
-- Replace bot token in config variables `config/development.json`
+- Clone the repository.
+- Ask for the test bot token and add it to your `default.json` config file.
+- Ask for db_url value to connect to mongo cloud and add it to your `default.json` config file.
 - `npm run start:dev`
+- Now you can talk to the test instance and add new features
 
 ## Heroku deployment
-`git push heroku master`
-Make sure you upload the right token in `config/default.json`
+Work in a branch and create a PR, once your PR is approved Heroku will automatically deploy `development` branch content
 
 ## Finding bot in Telegram
-`t.me/chol0bot`
+`t.me/chol0bot` | Production
+'`t.me/testcholobot`' | Development
 
 ## Babel config
 Project is using babel to write ES6 code, take a look `start` script in `package.json`
