@@ -40,4 +40,3 @@ if(isDevelopment) {
   app.telegram.setWebhook(`${URL}/bot${token}`);
   app.startWebhook(`/bot${token}`, null, PORT);
 }
-
