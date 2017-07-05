@@ -3,7 +3,7 @@ Telegram bot to handle Thursday's lunch rules
 
 ## Getting started
 - Clone the repository
-- Generate a Telegram bot token using botfather to test locally
+- Generate a Telegram bot token using [botfather](https://telegram.me/BotFather) to test locally
 - Replace bot token in config variables `config/development.json`
 - `npm run start:dev`
 
@@ -12,7 +12,14 @@ Telegram bot to handle Thursday's lunch rules
 Make sure you upload the right token in `config/default.json`
 
 ## Finding bot in Telegram
-`t.me/chol0bot`
+prod: `t.me/chol0bot`
+
+dev: `t.me/testcholobot`
+
+## Giphy integration
+
+- Generate an [api key for giphy api](https://developers.giphy.com/docs/)
+- add `giphy_token` and `giphy_url` in your `config/development.json`
 
 ## Babel config
 Project is using babel to write ES6 code, take a look `start` script in `package.json`
