@@ -47,4 +47,12 @@ exports.default = function (app) {
     var name = getNextName(people);
     setCurrent();
   });
+
+  app.command('jaja', function (ctx) {
+    ctx.reply(_staticResponses2.default['jaja']);
+  });
+
+  app.command('chupala', function (ctx) {
+    ctx.reply(_staticResponses2.default['chupala']);
+  });
 };
