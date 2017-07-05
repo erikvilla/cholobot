@@ -30,9 +30,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /** static data **/
 (0, _actions.getRules)().then(function (result) {
-  _cache2.default.setValue('rules', result.map(function (rule) {
+  _cache2.default.setValue('allRules', result.map(function (rule) {
     return rule.rule;
   }));
+  _cache2.default.setValue('rules', result);
 }).then((0, _actions.getMortos)().then(function (result) {
   _cache2.default.setValue('people', result);
 }));

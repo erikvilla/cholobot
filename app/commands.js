@@ -14,11 +14,12 @@ export default (app) => {
   });
 
   app.command('rules', ctx => {
-    const rules = cache.getValue('rules');
+    const rules = cache.getValue('allRules');
     const ruleString = rules.join('\n');
     ctx.reply(ruleString)
   });
 
+  
   app.command('mortos', ctx => {
     const people = cache.getValue('people');
     const nameArray = people.map(person => person.current ? `*${person.name}*` : person.name);

@@ -36,7 +36,7 @@ exports.default = function (app) {
   });
 
   app.command('rules', function (ctx) {
-    var rules = _cache2.default.getValue('rules');
+    var rules = _cache2.default.getValue('allRules');
     var ruleString = rules.join('\n');
     ctx.reply(ruleString);
   });
