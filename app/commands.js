@@ -32,4 +32,12 @@ export default (app) => {
     const name = getNextName(people);
     setCurrent();
   });
+  
+  app.command('jaja', (ctx) => {
+    ctx.reply(staticResponses['jaja']);
+  });
+  
+  app.command('chupala', (ctx) => {
+    ctx.reply(staticResponses['chupala']);
+  });
 }
