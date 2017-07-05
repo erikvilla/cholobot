@@ -41,11 +41,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var token = process.env.token || _config2.default.get('token');
 var URL = process.env.URL || _config2.default.get('URL');
 var PORT = process.env.PORT || 5000;
+var isDevelopment = process.env.NODE_ENV === 'development';
 
 var app = new _telegraf2.default(token);
-
-app.telegram.setWebhook(URL + '/bot' + token);
-app.startWebhook('/bot' + token, null, PORT);
-
 /** commands **/
 (0, _commands2.default)(app);
+
+if (isDevelopment) {
+  app.startPolling();
+} else {
+  app.telegram.setWebhook(URL + '/bot' + token);
+  app.startWebhook('/bot' + token, null, PORT);
+}
