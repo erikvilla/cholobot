@@ -6,5 +6,8 @@ export default {
   ],
   "qtvv": "Que te valga verga",
   "jaja": "JAJAJAJAJAJAJAJAJA",
-  "chupala": "chupala culero"
+  "chupala": [
+    "chupala culero"
+    , "chupala puto"
+    ]
 }
