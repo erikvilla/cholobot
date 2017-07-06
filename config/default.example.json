@@ -1,4 +1,8 @@
 {
-  "token": "<token here>",
-  "db_url": "<db_url here>"
+  "token": "<your bot token>",
+  "db_url": "<db url>",
+  "URL": "http://localhost",
+  "giphy_token": "<your giphy token>",
+  "giphy_url": "https://api.giphy.com/v1/gifs/"
 }
+
