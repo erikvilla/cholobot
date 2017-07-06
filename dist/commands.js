@@ -28,7 +28,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var giphyUrl = process.env.giphy_url || _config2.default.get('giphy_url');
 var giphyToken = process.env.giphy_token || _config2.default.get('giphy_token');
-var limit = 5;
+var limit = 50;
 
 exports.default = function (app) {
   app.command('start', function (ctx) {

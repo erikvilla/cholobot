@@ -6,7 +6,7 @@ import httpStatus from 'http-status-codes';
 
 const giphyUrl = process.env.giphy_url || config.get('giphy_url');
 const giphyToken = process.env.giphy_token || config.get('giphy_token');
-const limit = 5;
+const limit = 50;
 
 export default (app) => {
   app.command('start', ctx => {
