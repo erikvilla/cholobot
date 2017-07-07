@@ -6,7 +6,7 @@ import httpStatus from 'http-status-codes';
 
 const giphyUrl = process.env.giphy_url || config.get('giphy_url');
 const giphyToken = process.env.giphy_token || config.get('giphy_token');
-const limit = 5;
+const GIPHY_API_LIMIT = 25;
 
 export default (app) => {
   app.command('start', ctx => {
@@ -32,7 +32,7 @@ export default (app) => {
   });
 
   app.command('buenas', ctx => {
-    const index = Math.floor((Math.random() * staticResponses.buenas.length-1) + 1);
+    const index = getRandomNum(staticResponses.buenas.length);
     ctx.reply(staticResponses.buenas[index]);
   });
 
@@ -40,19 +40,19 @@ export default (app) => {
     const name = getNextName(people);
     setCurrent();
   });
-
+  
   app.command('0fucks', ctx => {
     const queryString = 'zero fucks';
     return promiseReply(queryString, ctx);
   });
 
-  app.command('fuck', ctx => {
+  app.command('fucku', ctx => {
     const queryString = 'fuck you';
     return promiseReply(queryString, ctx);
   });
 
   const promiseReply = (queryString, ctx) => {
-    const random = getRandomNum();
+    const random = getRandomNum(GIPHY_API_LIMIT);
     const url = getSearchGiphyURL(queryString);
     axios.get(url)
       .then(response => {
@@ -66,12 +66,33 @@ export default (app) => {
       });
   }
 
-  const getRandomNum = () => {
+  const getRandomNum = (limit) => {
     return Math.floor(Math.random() * limit);
   }
 
   const getSearchGiphyURL = (queryString) => {
-    return `${giphyUrl}search?api_key=${giphyToken}&q=${encodeURIComponent(queryString)}&limit=${limit}`;
+    return `${giphyUrl}search?api_key=${giphyToken}&q=${encodeURIComponent(queryString)}&limit=${GIPHY_API_LIMIT}`;
   }
 
+  app.command('jaja', ctx => {
+    ctx.reply(staticResponses['jaja']);
+  });
+  
+  app.command('chupala', ctx => {
+    const index = getRandomNum(staticResponses.chupala.length);
+    ctx.reply(staticResponses.chupala[index]);
+  });
+
+  app.command('vv', ctx => {
+    ctx.reply(staticResponses['vv']);
+  });
+  
+  app.command('hpvv', ctx => {
+    ctx.reply(staticResponses['hpvv']);
+  });
+  
+  app.command('fuck', ctx => {
+    const queryString = 'what the fuck';
+    return promiseReply(queryString, ctx);
+  });
 }
