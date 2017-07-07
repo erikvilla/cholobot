@@ -6,7 +6,7 @@ import httpStatus from 'http-status-codes';
 
 const giphyUrl = process.env.giphy_url || config.get('giphy_url');
 const giphyToken = process.env.giphy_token || config.get('giphy_token');
-const limit = 25;
+const GIPHY_API_LIMIT = 25;
 
 export default (app) => {
   app.command('start', ctx => {
@@ -32,7 +32,7 @@ export default (app) => {
   });
 
   app.command('buenas', ctx => {
-    const index = getRandomNum(staticResponses.buenas.length-1 + 1);
+    const index = getRandomNum(staticResponses.buenas.length);
     ctx.reply(staticResponses.buenas[index]);
   });
 
@@ -52,7 +52,7 @@ export default (app) => {
   });
 
   const promiseReply = (queryString, ctx) => {
-    const random = getRandomNum(limit);
+    const random = getRandomNum(GIPHY_API_LIMIT);
     const url = getSearchGiphyURL(queryString);
     axios.get(url)
       .then(response => {
@@ -71,7 +71,7 @@ export default (app) => {
   }
 
   const getSearchGiphyURL = (queryString) => {
-    return `${giphyUrl}search?api_key=${giphyToken}&q=${encodeURIComponent(queryString)}&limit=${limit}`;
+    return `${giphyUrl}search?api_key=${giphyToken}&q=${encodeURIComponent(queryString)}&limit=${GIPHY_API_LIMIT}`;
   }
 
   app.command('jaja', ctx => {
@@ -79,7 +79,7 @@ export default (app) => {
   });
   
   app.command('chupala', ctx => {
-    const index = getRandomNum(staticResponses.chupala.length-1 + 1);
+    const index = getRandomNum(staticResponses.chupala.length);
     ctx.reply(staticResponses.chupala[index]);
   });
 
