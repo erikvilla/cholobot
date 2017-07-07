@@ -55,7 +55,7 @@ exports.default = function (app) {
   });
 
   app.command('buenas', function (ctx) {
-    var index = Math.floor(Math.random() * _staticResponses2.default.buenas.length - 1 + 1);
+    var index = getRandomNum(_staticResponses2.default.buenas.length - 1 + 1);
     ctx.reply(_staticResponses2.default.buenas[index]);
   });
 
@@ -69,13 +69,13 @@ exports.default = function (app) {
     return promiseReply(queryString, ctx);
   });
 
-  app.command('fuck', function (ctx) {
+  app.command('fucku', function (ctx) {
     var queryString = 'fuck you';
     return promiseReply(queryString, ctx);
   });
 
   var promiseReply = function promiseReply(queryString, ctx) {
-    var random = getRandomNum();
+    var random = getRandomNum(limit);
     var url = getSearchGiphyURL(queryString);
     _axios2.default.get(url).then(function (response) {
       if (response.status === _httpStatusCodes2.default.OK) {
@@ -87,7 +87,7 @@ exports.default = function (app) {
     });
   };
 
-  var getRandomNum = function getRandomNum() {
+  var getRandomNum = function getRandomNum(limit) {
     return Math.floor(Math.random() * limit);
   };
 
@@ -100,7 +100,20 @@ exports.default = function (app) {
   });
 
   app.command('chupala', function (ctx) {
-    var index = Math.floor(Math.random() * _staticResponses2.default.chupala.length - 1 + 1);
+    var index = getRandomNum(_staticResponses2.default.chupala.length - 1 + 1);
     ctx.reply(_staticResponses2.default.chupala[index]);
+  });
+
+  app.command('vv', function (ctx) {
+    ctx.reply(_staticResponses2.default['vv']);
+  });
+
+  app.command('hpvv', function (ctx) {
+    ctx.reply(_staticResponses2.default['hpvv']);
+  });
+
+  app.command('fuck', function (ctx) {
+    var queryString = 'what the fuck';
+    return promiseReply(queryString, ctx);
   });
 };

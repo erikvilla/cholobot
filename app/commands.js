@@ -32,7 +32,7 @@ export default (app) => {
   });
 
   app.command('buenas', ctx => {
-    const index = Math.floor((Math.random() * staticResponses.buenas.length-1) + 1);
+    const index = getRandomNum(staticResponses.buenas.length-1 + 1);
     ctx.reply(staticResponses.buenas[index]);
   });
 
@@ -46,13 +46,13 @@ export default (app) => {
     return promiseReply(queryString, ctx);
   });
 
-  app.command('fuck', ctx => {
+  app.command('fucku', ctx => {
     const queryString = 'fuck you';
     return promiseReply(queryString, ctx);
   });
 
   const promiseReply = (queryString, ctx) => {
-    const random = getRandomNum();
+    const random = getRandomNum(limit);
     const url = getSearchGiphyURL(queryString);
     axios.get(url)
       .then(response => {
@@ -66,7 +66,7 @@ export default (app) => {
       });
   }
 
-  const getRandomNum = () => {
+  const getRandomNum = (limit) => {
     return Math.floor(Math.random() * limit);
   }
 
@@ -74,13 +74,25 @@ export default (app) => {
     return `${giphyUrl}search?api_key=${giphyToken}&q=${encodeURIComponent(queryString)}&limit=${limit}`;
   }
 
-  app.command('jaja', (ctx) => {
+  app.command('jaja', ctx => {
     ctx.reply(staticResponses['jaja']);
   });
   
-  app.command('chupala', (ctx) => {
-    const index = Math.floor((Math.random() * staticResponses.chupala.length-1) + 1);
+  app.command('chupala', ctx => {
+    const index = getRandomNum(staticResponses.chupala.length-1 + 1);
     ctx.reply(staticResponses.chupala[index]);
   });
 
+  app.command('vv', ctx => {
+    ctx.reply(staticResponses['vv']);
+  });
+  
+  app.command('hpvv', ctx => {
+    ctx.reply(staticResponses['hpvv']);
+  });
+  
+  app.command('fuck', ctx => {
+    const queryString = 'what the fuck';
+    return promiseReply(queryString, ctx);
+  });
 }
