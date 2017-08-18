@@ -48,12 +48,13 @@ const setCurrent = (name) => {
 }
 
 const removeCurrentMorto = () => {
+    connect();
     return Morto.findOne({
         current: true
     }, function(err, morto) {
         if (!err) {
             if (morto) {
-                morto.current = true;
+                morto.current = false;
                 morto.save(function(err) {
                     if (!err) {
                         console.log("Updated");
