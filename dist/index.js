@@ -8,21 +8,9 @@ var _config = require('config');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _mongoose = require('mongoose');
+var _bot = require('./bot.js');
 
-var _mongoose2 = _interopRequireDefault(_mongoose);
-
-var _rule = require('./model/rule.js');
-
-var _rule2 = _interopRequireDefault(_rule);
-
-var _commands = require('./commands');
-
-var _commands2 = _interopRequireDefault(_commands);
-
-var _asyncRulesCommands = require('./asyncRulesCommands');
-
-var _asyncRulesCommands2 = _interopRequireDefault(_asyncRulesCommands);
+var _bot2 = _interopRequireDefault(_bot);
 
 var _actions = require('./database/actions.js');
 
@@ -45,13 +33,11 @@ var app = new _telegraf2.default(token);
   _cache2.default.setValue('allRules', result.map(function (rule) {
     return rule.rule;
   }));
-  (0, _asyncRulesCommands2.default)(app, result);
+  /** creating bot instance **/
+  (0, _bot2.default)(app);
 }).then((0, _actions.getMortos)().then(function (result) {
   _cache2.default.setValue('people', result);
 }));
-
-/** commands **/
-(0, _commands2.default)(app);
 
 if (isDevelopment) {
   app.startPolling();
