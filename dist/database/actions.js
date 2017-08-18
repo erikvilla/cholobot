@@ -65,12 +65,13 @@ var setCurrent = function setCurrent(name) {
 };
 
 var removeCurrentMorto = function removeCurrentMorto() {
+    connect();
     return _morto2.default.findOne({
         current: true
     }, function (err, morto) {
         if (!err) {
             if (morto) {
-                morto.current = true;
+                morto.current = false;
                 morto.save(function (err) {
                     if (!err) {
                         console.log("Updated");

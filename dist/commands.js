@@ -104,7 +104,9 @@ var next = exports.next = function next(ctx) {
         });
         var name = getNextName(index);
         (0, _actions.setCurrent)(name);
-    });
+    }).then((0, _actions.getMortos)().then(function (result) {
+        _cache2.default.setValue('people', result);
+    }));
 };
 
 var zerofucks = exports.zerofucks = function zerofucks(ctx) {
