@@ -47,25 +47,25 @@ const setCurrent = (name) => {
     );
 }
 
-const removeCurrentMorto = () => {
+const removeCurrent = (name) => {
+    connect();
+    Morto.update({
+            name: name
+        }, {
+            current: false
+        }, {
+            multi: true,
+            strict: false
+        },
+        (error, object) => {} // TODO: Implement
+    );
+}
+
+const findCurrentMorto = () => {
     connect();
     return Morto.findOne({
         current: true
-    }, function(err, morto) {
-        if (!err) {
-            if (morto) {
-                morto.current = false;
-                morto.save(function(err) {
-                    if (!err) {
-                        console.log("Updated");
-                    } else {
-                        console.log("Error: could not update morto");
-                    }
-                });
-            }
-        }
     });
-
 }
 
 export {
@@ -74,5 +74,6 @@ export {
     getMortos,
     insertMorto,
     setCurrent,
-    removeCurrentMorto
+    removeCurrent,
+    findCurrentMorto
 };

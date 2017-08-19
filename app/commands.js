@@ -3,7 +3,7 @@ import staticResponses from './data/staticResponses.js';
 import axios from 'axios';
 import config from 'config';
 import httpStatus from 'http-status-codes';
-import { removeCurrentMorto, setCurrent, getMortos } from "./database/actions.js";
+import { removeCurrent, findCurrentMorto, setCurrent, getMortos } from "./database/actions.js";
 
 const giphyUrl = process.env.giphy_url || config.get('giphy_url');
 const giphyToken = process.env.giphy_token || config.get('giphy_token');
@@ -73,19 +73,25 @@ const getNextName = (index) => {
 
 export const next = (ctx) => {
     const people = cache.getValue('people');
-    removeCurrentMorto().then((morto) => {
-        const mortoName = morto.name;
+    findCurrentMorto().then((morto) => {
+        removeCurrent(morto.name);
+        return morto.name;
+    }).then((result) => {
+        const mortoName = result;
         const index = people.findIndex(
             (morto) => {
                 return morto.name === mortoName;
             }
         );
-        const name = getNextName(index);
-        setCurrent(name);
-    }).then(
+        return index;
+    }).then((result) => {
+        const name = getNextName(result);
+        return setCurrent(name);
+    }).then(() => {
         getMortos().then((result) => {
             cache.setValue('people', result);
-    }));
+        })
+    });
 };
 
 export const zerofucks = (ctx) => {
