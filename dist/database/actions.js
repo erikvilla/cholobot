@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.removeCurrentMorto = exports.setCurrent = exports.insertMorto = exports.getMortos = exports.getRules = exports.connect = undefined;
+exports.findCurrentMorto = exports.removeCurrent = exports.setCurrent = exports.insertMorto = exports.getMortos = exports.getRules = exports.connect = undefined;
 
 var _mongoose = require('mongoose');
 
@@ -64,23 +64,23 @@ var setCurrent = function setCurrent(name) {
     );
 };
 
-var removeCurrentMorto = function removeCurrentMorto() {
+var removeCurrent = function removeCurrent(name) {
+    connect();
+    _morto2.default.update({
+        name: name
+    }, {
+        current: false
+    }, {
+        multi: true,
+        strict: false
+    }, function (error, object) {} // TODO: Implement
+    );
+};
+
+var findCurrentMorto = function findCurrentMorto() {
     connect();
     return _morto2.default.findOne({
         current: true
-    }, function (err, morto) {
-        if (!err) {
-            if (morto) {
-                morto.current = false;
-                morto.save(function (err) {
-                    if (!err) {
-                        console.log("Updated");
-                    } else {
-                        console.log("Error: could not update morto");
-                    }
-                });
-            }
-        }
     });
 };
 
@@ -89,4 +89,5 @@ exports.getRules = getRules;
 exports.getMortos = getMortos;
 exports.insertMorto = insertMorto;
 exports.setCurrent = setCurrent;
-exports.removeCurrentMorto = removeCurrentMorto;
+exports.removeCurrent = removeCurrent;
+exports.findCurrentMorto = findCurrentMorto;

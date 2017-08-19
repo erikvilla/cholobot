@@ -97,16 +97,23 @@ var getNextName = function getNextName(index) {
 
 var next = exports.next = function next(ctx) {
     var people = _cache2.default.getValue('people');
-    (0, _actions.removeCurrentMorto)().then(function (morto) {
-        var mortoName = morto.name;
+    (0, _actions.findCurrentMorto)().then(function (morto) {
+        (0, _actions.removeCurrent)(morto.name);
+        return morto.name;
+    }).then(function (result) {
+        var mortoName = result;
         var index = people.findIndex(function (morto) {
             return morto.name === mortoName;
         });
-        var name = getNextName(index);
-        (0, _actions.setCurrent)(name);
-    }).then((0, _actions.getMortos)().then(function (result) {
-        _cache2.default.setValue('people', result);
-    }));
+        return index;
+    }).then(function (result) {
+        var name = getNextName(result);
+        return (0, _actions.setCurrent)(name);
+    }).then(function () {
+        (0, _actions.getMortos)().then(function (result) {
+            _cache2.default.setValue('people', result);
+        });
+    });
 };
 
 var zerofucks = exports.zerofucks = function zerofucks(ctx) {
