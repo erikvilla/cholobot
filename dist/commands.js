@@ -108,11 +108,12 @@ var next = exports.next = function next(ctx) {
         return index;
     }).then(function (result) {
         var name = getNextName(result);
+        ctx.reply(name + ' is next');
         return (0, _actions.setCurrent)(name);
     }).then(function () {
-        (0, _actions.getMortos)().then(function (result) {
-            _cache2.default.setValue('people', result);
-        });
+        return (0, _actions.getMortos)();
+    }).then(function (result) {
+        _cache2.default.setValue('people', result);
     });
 };
 

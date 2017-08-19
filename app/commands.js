@@ -86,11 +86,12 @@ export const next = (ctx) => {
         return index;
     }).then((result) => {
         const name = getNextName(result);
+        ctx.reply(`${name} is next`);
         return setCurrent(name);
     }).then(() => {
-        getMortos().then((result) => {
-            cache.setValue('people', result);
-        })
+        return getMortos();
+    }).then((result) => {
+        cache.setValue('people', result);
     });
 };
 
