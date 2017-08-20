@@ -1,4 +1,7 @@
-import Telegraf, { Extra, Markup } from 'telegraf';
+import Telegraf, {
+  Extra,
+  Markup
+} from 'telegraf';
 import config from 'config';
 import bot from './bot.js';
 import {
@@ -26,9 +29,9 @@ getRules().then((result) => {
   })
 );
 
-if(isDevelopment) {
+if (isDevelopment) {
   app.startPolling();
-}else {
+} else {
   app.telegram.setWebhook(`${URL}/bot${token}`);
   app.startWebhook(`/bot${token}`, null, PORT);
 }

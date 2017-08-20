@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.findCurrentMorto = exports.removeCurrent = exports.setCurrent = exports.insertMorto = exports.getMortos = exports.getRules = exports.connect = undefined;
 
@@ -26,62 +26,62 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var db = null;
 
 var connect = function connect() {
-    if (!db) {
-        var dbURL = process.env.db_url || _config2.default.get('db_url');
-        _mongoose2.default.connect(dbURL);
-        db = _mongoose2.default.connection;
-    }
+  if (!db) {
+    var dbURL = process.env.db_url || _config2.default.get('db_url');
+    _mongoose2.default.connect(dbURL);
+    db = _mongoose2.default.connection;
+  }
 };
 
 var getRules = function getRules() {
-    connect();
-    return _rule2.default.find();
+  connect();
+  return _rule2.default.find();
 };
 
 var getMortos = function getMortos() {
-    connect();
-    return _morto2.default.find();
+  connect();
+  return _morto2.default.find();
 };
 
 var insertMorto = function insertMorto(name) {
-    connect();
-    var newRow = new _morto2.default({
-        name: name
-    });
-    return newRow.save();
+  connect();
+  var newRow = new _morto2.default({
+    name: name
+  });
+  return newRow.save();
 };
 
 var setCurrent = function setCurrent(name) {
-    connect();
-    _morto2.default.update({
-        name: name
-    }, {
-        current: true
-    }, {
-        multi: true,
-        strict: false
-    }, function (error, object) {} // TODO: Implement
-    );
+  connect();
+  _morto2.default.update({
+    name: name
+  }, {
+    current: true
+  }, {
+    multi: true,
+    strict: false
+  }, function (error, object) {} // TODO: Implement
+  );
 };
 
 var removeCurrent = function removeCurrent(name) {
-    connect();
-    _morto2.default.update({
-        name: name
-    }, {
-        current: false
-    }, {
-        multi: true,
-        strict: false
-    }, function (error, object) {} // TODO: Implement
-    );
+  connect();
+  _morto2.default.update({
+    name: name
+  }, {
+    current: false
+  }, {
+    multi: true,
+    strict: false
+  }, function (error, object) {} // TODO: Implement
+  );
 };
 
 var findCurrentMorto = function findCurrentMorto() {
-    connect();
-    return _morto2.default.findOne({
-        current: true
-    });
+  connect();
+  return _morto2.default.findOne({
+    current: true
+  });
 };
 
 exports.connect = connect;

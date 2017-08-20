@@ -1,5 +1,5 @@
 import mongoose, {
-    Model
+  Model
 } from 'mongoose';
 import config from 'config';
 import Rule from '../model/rule.js';
@@ -8,72 +8,72 @@ import Morto from '../model/morto.js';
 let db = null;
 
 const connect = () => {
-    if (!db) {
-        const dbURL = process.env.db_url || config.get('db_url');
-        mongoose.connect(dbURL);
-        db = mongoose.connection;
-    }
+  if (!db) {
+    const dbURL = process.env.db_url || config.get('db_url');
+    mongoose.connect(dbURL);
+    db = mongoose.connection;
+  }
 };
 
 const getRules = () => {
-    connect();
-    return Rule.find();
+  connect();
+  return Rule.find();
 };
 
 const getMortos = () => {
-    connect();
-    return Morto.find();
+  connect();
+  return Morto.find();
 };
 
 const insertMorto = (name) => {
-    connect();
-    const newRow = new Morto({
-        name: name,
-    });
-    return newRow.save();
+  connect();
+  const newRow = new Morto({
+    name: name,
+  });
+  return newRow.save();
 };
 
 const setCurrent = (name) => {
-    connect();
-    Morto.update({
-            name: name
-        }, {
-            current: true
-        }, {
-            multi: true,
-            strict: false
-        },
-        (error, object) => {} // TODO: Implement
-    );
+  connect();
+  Morto.update({
+      name: name
+    }, {
+      current: true
+    }, {
+      multi: true,
+      strict: false
+    },
+    (error, object) => {} // TODO: Implement
+  );
 }
 
 const removeCurrent = (name) => {
-    connect();
-    Morto.update({
-            name: name
-        }, {
-            current: false
-        }, {
-            multi: true,
-            strict: false
-        },
-        (error, object) => {} // TODO: Implement
-    );
+  connect();
+  Morto.update({
+      name: name
+    }, {
+      current: false
+    }, {
+      multi: true,
+      strict: false
+    },
+    (error, object) => {} // TODO: Implement
+  );
 }
 
 const findCurrentMorto = () => {
-    connect();
-    return Morto.findOne({
-        current: true
-    });
+  connect();
+  return Morto.findOne({
+    current: true
+  });
 }
 
 export {
-    connect,
-    getRules,
-    getMortos,
-    insertMorto,
-    setCurrent,
-    removeCurrent,
-    findCurrentMorto
+  connect,
+  getRules,
+  getMortos,
+  insertMorto,
+  setCurrent,
+  removeCurrent,
+  findCurrentMorto
 };
