@@ -8,7 +8,7 @@ import {
   findCurrentMorto,
   setCurrent,
   getMortos
-} from "./database/actions.js";
+} from './database/actions.js';
 
 const giphyUrl = process.env.giphy_url || config.get('giphy_url');
 const giphyToken = process.env.giphy_token || config.get('giphy_token');
