@@ -4,11 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _cache = require('./database/cache.js');
+var _cache = require('./database/cache');
 
 var _cache2 = _interopRequireDefault(_cache);
 
-var _commands = require('./commands.js');
+var _commands = require('./commands');
 
 var commands = _interopRequireWildcard(_commands);
 
@@ -17,8 +17,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (app) {
-
-  //Adding commands to bot
+  // Adding commands to bot
   app.command('start', function (ctx) {
     ctx.reply('Welcome!');
   });
@@ -31,20 +30,19 @@ exports.default = function (app) {
     });
   };
 
-  for (var i = 0; i < rules.length; i++) {
+  for (var i = 0; i < rules.length; i += 1) {
     _loop(i);
   }
 
-  //Adding all commands to bot
-
-  var _loop2 = function _loop2() {
-    var cmd = commands[cmdName];
-    app.command(cmdName, function (ctx) {
-      cmd(ctx);
-    });
-  };
-
+  // Adding all commands to bot
   for (var cmdName in commands) {
-    _loop2();
+    if (cmdName) {
+      (function () {
+        var cmd = commands[cmdName];
+        app.command(cmdName, function (ctx) {
+          cmd(ctx);
+        });
+      })();
+    }
   }
 };
