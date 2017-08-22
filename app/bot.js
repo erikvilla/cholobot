@@ -2,7 +2,6 @@ import cache from './database/cache';
 import * as commands from './commands';
 
 export default (app) => {
-  // Adding commands to bot
   app.command('start', (ctx) => {
     ctx.reply('Welcome!');
   });
@@ -15,12 +14,12 @@ export default (app) => {
   }
 
   // Adding all commands to bot
-  for (const cmdName in commands) {
-    if (cmdName) {
-      const cmd = commands[cmdName];
-      app.command(cmdName, (ctx) => {
+  Object.keys(commands).forEach((key) => {
+    if (key) {
+      const cmd = commands[key];
+      app.command(key, (ctx) => {
         cmd(ctx);
       });
     }
-  }
+  });
 };
