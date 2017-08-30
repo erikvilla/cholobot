@@ -81,16 +81,15 @@ export const next = (ctx) => {
   findCurrentMorto().then((morto) => {
     removeCurrent(morto.name);
     return morto.name;
-  }).then((result) => {
-    const mortoName = result;
+  }).then((mortoName) => {
     const index = people.findIndex(
       (morto) => {
         return morto.name === mortoName;
       }
     );
     return index;
-  }).then((result) => {
-    const name = getNextName(result);
+  }).then((index) => {
+    const name = getNextName(index);
     ctx.reply(`${name} is next`);
     return setCurrent(name);
   }).then(() => {
