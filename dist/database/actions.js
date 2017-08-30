@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setCurrent = exports.insertMorto = exports.getMortos = exports.getRules = exports.connect = undefined;
+exports.findCurrentMorto = exports.removeCurrent = exports.setCurrent = exports.insertMorto = exports.getMortos = exports.getRules = exports.connect = undefined;
 
 var _mongoose = require('mongoose');
 
@@ -13,11 +13,11 @@ var _config = require('config');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _rule = require('../model/rule.js');
+var _rule = require('../model/rule');
 
 var _rule2 = _interopRequireDefault(_rule);
 
-var _morto = require('../model/morto.js');
+var _morto = require('../model/morto');
 
 var _morto2 = _interopRequireDefault(_morto);
 
@@ -53,8 +53,33 @@ var insertMorto = function insertMorto(name) {
 
 var setCurrent = function setCurrent(name) {
   connect();
-  _morto2.default.update({ name: name }, { current: true }, { multi: true, strict: false }, function (error, object) {} // TODO: Implement
-  );
+  _morto2.default.update({
+    name: name
+  }, {
+    current: true
+  }, {
+    multi: true,
+    strict: false
+  });
+};
+
+var removeCurrent = function removeCurrent(name) {
+  connect();
+  _morto2.default.update({
+    name: name
+  }, {
+    current: false
+  }, {
+    multi: true,
+    strict: false
+  });
+};
+
+var findCurrentMorto = function findCurrentMorto() {
+  connect();
+  return _morto2.default.findOne({
+    current: true
+  });
 };
 
 exports.connect = connect;
@@ -62,3 +87,5 @@ exports.getRules = getRules;
 exports.getMortos = getMortos;
 exports.insertMorto = insertMorto;
 exports.setCurrent = setCurrent;
+exports.removeCurrent = removeCurrent;
+exports.findCurrentMorto = findCurrentMorto;
