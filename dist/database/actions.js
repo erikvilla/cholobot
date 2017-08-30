@@ -13,11 +13,11 @@ var _config = require('config');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _rule = require('../model/rule.js');
+var _rule = require('../model/rule');
 
 var _rule2 = _interopRequireDefault(_rule);
 
-var _morto = require('../model/morto.js');
+var _morto = require('../model/morto');
 
 var _morto2 = _interopRequireDefault(_morto);
 
@@ -60,8 +60,7 @@ var setCurrent = function setCurrent(name) {
   }, {
     multi: true,
     strict: false
-  }, function (error, object) {} // TODO: Implement
-  );
+  });
 };
 
 var removeCurrent = function removeCurrent(name) {
@@ -73,8 +72,7 @@ var removeCurrent = function removeCurrent(name) {
   }, {
     multi: true,
     strict: false
-  }, function (error, object) {} // TODO: Implement
-  );
+  });
 };
 
 var findCurrentMorto = function findCurrentMorto() {

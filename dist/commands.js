@@ -100,14 +100,13 @@ var next = exports.next = function next(ctx) {
   (0, _actions.findCurrentMorto)().then(function (morto) {
     (0, _actions.removeCurrent)(morto.name);
     return morto.name;
-  }).then(function (result) {
-    var mortoName = result;
+  }).then(function (mortoName) {
     var index = people.findIndex(function (morto) {
       return morto.name === mortoName;
     });
     return index;
-  }).then(function (result) {
-    var name = getNextName(result);
+  }).then(function (index) {
+    var name = getNextName(index);
     ctx.reply(name + ' is next');
     return (0, _actions.setCurrent)(name);
   }).then(function () {

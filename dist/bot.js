@@ -17,7 +17,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (app) {
-  // Adding commands to bot
   app.command('start', function (ctx) {
     ctx.reply('Welcome!');
   });
@@ -35,14 +34,12 @@ exports.default = function (app) {
   }
 
   // Adding all commands to bot
-  for (var cmdName in commands) {
-    if (cmdName) {
-      (function () {
-        var cmd = commands[cmdName];
-        app.command(cmdName, function (ctx) {
-          cmd(ctx);
-        });
-      })();
+  Object.keys(commands).forEach(function (key) {
+    if (key) {
+      var cmd = commands[key];
+      app.command(key, function (ctx) {
+        cmd(ctx);
+      });
     }
-  }
+  });
 };
