@@ -1,61 +1,57 @@
-import cache from './database/cache.js';
-import staticResponses from './data/staticResponses.js';
 import axios from 'axios';
 import config from 'config';
 import httpStatus from 'http-status-codes';
+import cache from './database/cache';
+import staticResponses from './data/staticResponses';
+
 import {
   removeCurrent,
   findCurrentMorto,
   setCurrent,
-  getMortos
-} from './database/actions.js';
+  getMortos,
+} from './database/actions';
 
 const giphyUrl = process.env.giphy_url || config.get('giphy_url');
 const giphyToken = process.env.giphy_token || config.get('giphy_token');
 const GIPHY_API_LIMIT = 25;
 
+const getRandomNum = limit => Math.floor(Math.random() * limit);
+
+const getSearchGiphyURL = queryString =>
+  `${giphyUrl}search?api_key=${giphyToken}&q=${encodeURIComponent(queryString)}&limit=${GIPHY_API_LIMIT}`;
+
 const promiseReply = (queryString, ctx) => {
   const random = getRandomNum(GIPHY_API_LIMIT);
   const url = getSearchGiphyURL(queryString);
   axios.get(url)
-    .then(response => {
+    .then((response) => {
       if (response.status === httpStatus.OK) {
         ctx.reply(response.data.data[random].url);
       }
     })
-    .catch(error => {
-      console.log(error);
-      ctx.reply('error');
+    .catch((error) => {
+      ctx.reply('error: ', JSON.stringify(error, null, 2));
     });
-}
-
-const getRandomNum = (limit) => {
-  return Math.floor(Math.random() * limit);
-}
-
-const getSearchGiphyURL = (queryString) => {
-  return `${giphyUrl}search?api_key=${giphyToken}&q=${encodeURIComponent(queryString)}&limit=${GIPHY_API_LIMIT}`;
-}
+};
 
 export const rules = (ctx) => {
-  let rules = cache.getValue('allRules');
-  let i = 1;
-  rules = rules.map(rule => {
-    return `${i++}.- ${rule}`;
+  let i = 0;
+  let result = '';
+  cache.getValue('allRules').forEach((rule) => {
+    result += `${i += 1}.- ${rule} \n`;
   });
-  const ruleString = rules.join('\n');
-  ctx.reply(ruleString)
+  ctx.reply(result);
 };
 
 export const mortos = (ctx) => {
   const people = cache.getValue('people');
-  const nameArray = people.map(person => person.current ? `*${person.name}*` : person.name);
+  const nameArray = people.map(person => (person.current ? `*${person.name}*` : person.name));
   const peopleString = nameArray.join('\n');
-  ctx.reply(peopleString)
+  ctx.reply(peopleString);
 };
 
 export const qtvv = (ctx) => {
-  ctx.reply(staticResponses['qtvv']);
+  ctx.reply(staticResponses.qtvv);
 };
 
 export const buenas = (ctx) => {
@@ -74,7 +70,7 @@ const getNextName = (index) => {
   }
 
   return name;
-}
+};
 
 export const next = (ctx) => {
   const people = cache.getValue('people');
@@ -82,21 +78,42 @@ export const next = (ctx) => {
     removeCurrent(morto.name);
     return morto.name;
   }).then((mortoName) => {
-    const index = people.findIndex(
-      (morto) => {
-        return morto.name === mortoName;
-      }
-    );
+    const index =
+      people.findIndex(morto => morto.name === mortoName);
     return index;
   }).then((index) => {
     const name = getNextName(index);
     ctx.reply(`${name} is next`);
     return setCurrent(name);
-  }).then(() => {
-    return getMortos();
-  }).then((result) => {
+  })
+  .then(() => getMortos())
+  .then((result) => {
     cache.setValue('people', result);
   });
+};
+
+export const jaja = (ctx) => {
+  ctx.reply(staticResponses.jaja);
+};
+
+export const chupala = (ctx) => {
+  const index = getRandomNum(staticResponses.chupala.length);
+  ctx.reply(staticResponses.chupala[index]);
+};
+
+export const vv = (ctx) => {
+  ctx.reply(staticResponses.vv);
+};
+
+export const hpvv = (ctx) => {
+  ctx.reply(staticResponses.hpvv);
+};
+
+/* GIPHY responses */
+
+export const fuck = (ctx) => {
+  const queryString = 'what the fuck';
+  return promiseReply(queryString, ctx);
 };
 
 export const zerofucks = (ctx) => {
@@ -106,27 +123,5 @@ export const zerofucks = (ctx) => {
 
 export const fucku = (ctx) => {
   const queryString = 'fuck you';
-  return promiseReply(queryString, ctx);
-};
-
-export const jaja = (ctx) => {
-  ctx.reply(staticResponses['jaja']);
-};
-
-export const chupala = (ctx) => {
-  const index = getRandomNum(staticResponses.chupala.length);
-  ctx.reply(staticResponses.chupala[index]);
-};
-
-export const vv = (ctx) => {
-  ctx.reply(staticResponses['vv']);
-};
-
-export const hpvv = (ctx) => {
-  ctx.reply(staticResponses['hpvv']);
-};
-
-export const fuck = (ctx) => {
-  const queryString = 'what the fuck';
   return promiseReply(queryString, ctx);
 };

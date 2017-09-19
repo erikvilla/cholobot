@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const ruleSchema = mongoose.Schema({
-  rule: String
+  rule: String,
 });
 const Rule = mongoose.model('Rule', ruleSchema);
 

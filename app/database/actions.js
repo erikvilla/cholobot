@@ -26,7 +26,7 @@ const getMortos = () => {
 const insertMorto = (name) => {
   connect();
   const newRow = new Morto({
-    name: name,
+    name,
   });
   return newRow.save();
 };
@@ -34,7 +34,7 @@ const insertMorto = (name) => {
 const setCurrent = (name) => {
   connect();
   Morto.update({
-    name: name,
+    name,
   }, {
     current: true,
   }, {
@@ -47,7 +47,7 @@ const setCurrent = (name) => {
 const removeCurrent = (name) => {
   connect();
   Morto.update({
-    name: name,
+    name,
   }, {
     current: false,
   }, {
