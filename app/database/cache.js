@@ -1,16 +1,16 @@
 class Cache {
-  constructor(initObject) {
-    if(!Cache.instance){
+  constructor() {
+    if (!Cache.instance) {
       this.data = {};
       Cache.instance = this;
     }
   }
 
-  setValue(key, value){
+  setValue(key, value) {
     this.data[key] = value;
   }
 
-  getValue(key){
+  getValue(key) {
     return this.data[key];
   }
 }

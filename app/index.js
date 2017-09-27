@@ -1,14 +1,11 @@
-import Telegraf, {
-  Extra,
-  Markup
-} from 'telegraf';
+import Telegraf from 'telegraf';
 import config from 'config';
-import bot from './bot.js';
+import bot from './bot';
 import {
   getRules,
   getMortos,
-} from './database/actions.js';
-import cache from './database/cache.js';
+} from './database/actions';
+import cache from './database/cache';
 
 /** telegram app **/
 const token = process.env.token || config.get('token');
@@ -26,7 +23,7 @@ getRules().then((result) => {
 }).then(
   getMortos().then((result) => {
     cache.setValue('people', result);
-  })
+  }),
 );
 
 if (isDevelopment) {
