@@ -1,8 +1,9 @@
 export default {
   buenas: [
     'Que tienen de buenas',
-    'Que tranza loroña',
+    'Que tranza carnales',
     'No estes chingando',
+    'Ahora que quieres?',
   ],
   qtvv: 'Que te valga verga',
   jaja: 'JAJAJAJAJAJAJAJAJA',
@@ -10,6 +11,9 @@ export default {
     'chupala culero',
     'chupala puto',
   ],
-  vv: 'vale verga',
+  vv: [
+    'vale verga',
+    'vale verga la vida',
+  ],
   hpvv: 'hasta para valer verga vales verga',
 };
